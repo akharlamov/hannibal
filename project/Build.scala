@@ -12,10 +12,10 @@ object ApplicationBuild extends Build {
     val appVersion      = "1.0-SNAPSHOT"
 
     val hBaseVersion    =
-      if(Seq("0.90", "0.92", "0.94", "0.96", "0.98", "1.3.0").contains(getenv("HANNIBAL_HBASE_VERSION")))
+      if(Seq("0.90", "0.92", "0.94", "0.96", "0.98", "1.2.0", "1.3.0").contains(getenv("HANNIBAL_HBASE_VERSION")))
         getenv("HANNIBAL_HBASE_VERSION")
       else
-        "1.3.0"
+        "1.2.0"
 
     println("Configuring for HBase Version: %s".format(hBaseVersion))
 
@@ -50,6 +50,12 @@ object ApplicationBuild extends Build {
         "org.apache.hadoop" % "hadoop-common" % "2.4.0",
         "org.apache.hbase" % "hbase-common" % "0.98.1-hadoop2",
         "org.apache.hbase" % "hbase-client" % "0.98.1-hadoop2"
+      )
+      case "1.2.0" => Seq(
+        "org.apache.hbase" % "hbase-common" % "1.2.0",
+        "org.apache.hbase" % "hbase-client" % "1.2.0",
+        "org.apache.hadoop" % "hadoop-common" % "2.6.0",
+        "org.apache.hadoop" % "hadoop-client" % "2.6.0"
       )
       case "1.3.0" => Seq(
         "org.apache.hbase" % "hbase-common" % "1.3.0",
