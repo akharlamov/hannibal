@@ -28,10 +28,9 @@
         <value>%HBASE_QUORUM%</value>
     </property>
 
-    <!--<property>-->
-    <!--<property>-->
-        <!--<name>hbase.regionserver.info.port</name>-->
-        <!--<value>60030</value>-->
-    <!--</property>-->
+    <property>
+        <name>hbase.regionserver.info.port</name>
+        <value>%HBASE_INFO_PORT%</value>
+    </property>
 
 </configuration>

@@ -5,6 +5,7 @@ services:
       image: hannibal:latest
       environment:
         - HANNIBAL_HBASE_QUORUM=cdh-worker03.lga08.nsone.co,cdh-worker02.lga08.nsone.co,cdh-worker01.lga08.nsone.co
+        - HANNIBAL_HBASE_INFO_PORT=60030
       ports:
         - '9090:9000'
       expose:
