@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+    hannibal:
+      image: hannibal:latest
+      ports:
+        - '9090:9000'
+      volumes:
+        - my-db:/opt/hannibal/data
+
+# Names our volume
+volumes:
+  my-db:

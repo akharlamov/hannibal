@@ -25,7 +25,7 @@
     <!-- Defaults to Standalone Configuration for Vagrant -->
     <property>
         <name>hbase.zookeeper.quorum</name>
-        <value>localhost</value>
+        <value>%HBASE_QUORUM%</value>
     </property>
 
     <!--<property>-->
