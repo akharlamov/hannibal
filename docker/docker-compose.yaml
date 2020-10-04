@@ -3,11 +3,16 @@ version: '3.3'
 services:
     hannibal:
       image: hannibal:latest
+      environment:
+        - HANNIBAL_HBASE_QUORUM=cdh-worker03.lga08.nsone.co,cdh-worker02.lga08.nsone.co,cdh-worker01.lga08.nsone.co
       ports:
         - '9090:9000'
+      expose:
+        - '9090'
       volumes:
         - my-db:/opt/hannibal/data
 
 # Names our volume
 volumes:
   my-db:
+
