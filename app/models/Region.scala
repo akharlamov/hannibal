@@ -89,6 +89,38 @@ object Region {
     Cache.set("regions.forTable", groupedRegions);
   }
 
+  def extractEscapedCode(it: Iterator[Char]): String = {
+    var result = "\\"
+    if(it.nonEmpty) {
+      val c = it.next()
+      result += c
+      if(c == 'x' && it.nonEmpty){
+        // We got proper prefix for Hex character
+        var code = "" + it.next()
+        if(it.nonEmpty){
+          code += it.next()
+          result = code
+        } else {
+          result += code
+        }
+      }
+    }
+    result
+  }
+
+  def normalizeKey(strKey: String): String = {
+    val it = strKey.iterator
+    var result = ""
+    for(c <- it){
+      val code = c match {
+        case '\\' => extractEscapedCode(it)
+        case _    => c.toByte.toHexString
+      }
+      result += code
+    }
+    result.toLowerCase()
+  }
+
   implicit val regionWrites = new Writes[Region] {
     def writes(region: Region) = Json.obj(
       "regionName" -> region.regionName,
@@ -102,6 +134,7 @@ object Region {
       "memstoreSizeMB" -> region.memstoreSizeMB,
       "tableName" -> region.tableName,
       "startKey" -> region.startKey,
+      "startKeyCanon" -> normalizeKey(region.startKey),
       "regionIdTimestamp" -> region.regionIdTimestamp,
       "regionURI" -> region.regionURI,
       "serverInfoUrl" -> region.serverInfoUrl
